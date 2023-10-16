@@ -52,13 +52,13 @@ def view_toy(id):
     data={
         "id": id
     }
-    data2={
-        "id": session["user_id"]
-    }
+    # data2={
+    #     "id": session["user_id"]
+    # }
 
     Toy=Toy.show_toy(data)
-    user=User.get_by_id(data2)
-    return render_template("show_toy.html", Toy=Toy, user=user)
+    # user=User.get_by_id(data2)
+    return render_template("show_toy.html", Toy=Toy)
 
 
 @app.route('/toys/edit/<int:id>')
@@ -72,11 +72,11 @@ def edit_toy(id):
     toy=Toy.show_toy(data)
     print(data)
     
-    data2={
-        "id": session["user_id"]
-    }
-    user=User.get_by_id(data2)
-    return render_template("edit_toy.html", toy=toy, user=user)
+    # data2={
+    #     "id": session["user_id"]
+    # }
+    # user=User.get_by_id(data2)
+    return render_template("edit_toy.html", toy=toy)
 
 
 @app.route('/toys/update/<int:id>', methods=['POST'])
@@ -85,7 +85,7 @@ def update_toy(id):
         return redirect('/logout')
 
     else:
-        if not Toy.validate_update(request.form):
+        if not Toy.validate_toy(request.form):
             print("validation failed")
             return redirect(f'/toys/edit/{id}')
 
