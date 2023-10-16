@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js"></script>
+    <title>Edit Toy</title>
+</head>
+<body>
+    <form id="edit-form" action="/toys/edit/<int:id>" method="POST"enctype="multipart/form-data">
+        <input type="hidden" name="user_id" value="{{session['user_id']}}">
+        
+        <label for="toy_name">Toy Name:</label>
+        <input type="text" id="toy_name" name="toy_name" required>
+
+        <div class="container">
+            <img src="default-image.jpg" alt="Your Image" class="image" id="uploadedImage">
+            <input type="file" accept="image/*" class="hidden" id="imageInput" onchange="displayImage()">
+        </div>
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required>
+
+        <label for="year">Year:</label>
+        <input type="text" id="year" name="year" required>
+
+        <button type="button" onclick="updateToy()">Update</button>
+    </form>
+</body>
+</html>

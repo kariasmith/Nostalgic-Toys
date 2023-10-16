@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='show_toy.css') }}">
+    <script src="script.js"></script>
+    <title>Show Toy</title>
+</head>
+<body>
+    {% for toy in toy_records %}
+    <div class="toy-card">
+        <h2>{{ toy.toy_name }}</h2>
+        <img src="{{ url_for('static', filename='uploads/' + toy.image_path) }}" alt="Toy Image">
+        <p>{{ toy.description }}</p>
+        <p>Year: {{ toy.year }}</p>
+    </div>
+{% endfor %}
+</body>
+</html>

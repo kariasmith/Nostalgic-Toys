@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, flash
-import requests
+#import requests
+from werkzeug.utils import secure_filename
+import os
 from flask_app import app
 from flask_app.models.user_model import User
 from flask_app.models.toy_model import Toy
@@ -34,11 +36,23 @@ def new_toy():
         
         data={
             "toy_name": request.form["toy_name"],
-            # "image": request.form["image"],------------------------------Not sure for a blob file
             "description": request.form["description"],
             "year": request.form["year"],
             "user_id": session["user_id"]
             }
+        
+        uploaded_image = request.files.get('imageInput')
+        if uploaded_image:
+            # Save the uploaded image to a specific folder on your server
+            # Construct the image path based on a filename (e.g., the toy's name)
+            # This assumes you have a folder named 'uploads' for storing images
+            image_filename = secure_filename(uploaded_image.filename)
+            image_path = os.path.join(app.config['uploads'], image_filename)
+            uploaded_image.save(image_path)
+
+            # Store the image path in the data dictionary
+            data["image_path"] = image_filename
+            
         Toy.add_toy(data)
         print(data)
     return redirect('/dashboard')
@@ -56,9 +70,9 @@ def view_toy(id):
     #     "id": session["user_id"]
     # }
 
-    Toy=Toy.show_toy(data)
+    toy=Toy.show_toy(data)
     # user=User.get_by_id(data2)
-    return render_template("show_toy.html", Toy=Toy)
+    return render_template("show_toy.html", toy=toy)
 
 
 @app.route('/toys/edit/<int:id>')

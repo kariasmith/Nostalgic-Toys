@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <script src="script.js"></script>
+    <title>Dashbaord</title>
+</head>
+<body>
+    <h1>Nostaglic Toys</h1>
+    <h2>Welcome {{user.first_name}}!</h2>
+    <nav class="nav-bar">
+        <ul>
+            <li><a href="/toys/new">Add Toy</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        {% for toy in toys %}
+        <div class="toy-card">
+            <h2>{{ toy.toy_name }}</h2>
+            <img src="{{ url_for('static', filename='uploads/' + toy.image_path) }}" alt="Toy Image">
+            <p>{{ toy.description }}</p>
+            <p>Year: {{ toy.year }}</p>
+        </div>
+        {% endfor %}
+
+        <div class="actions">
+            <a href="/toys/{{ toys.id }}">View</a> |
+            {% if session['user_id'] == toys.user_id %}
+            <a href="/toys/edit/{{ toys.id }}">Edit</a> |
+            <a href="/toys/update/{{ toys.id }}">Update</a> |
+            <a href="/toys/delete/{{ toys.id }}">Delete</a>
+            {% endif %}
+    </div> 
+
+</body>
+</html>

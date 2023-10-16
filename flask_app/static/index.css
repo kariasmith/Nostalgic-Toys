@@ -1,0 +1,20 @@
+body{
+    background-color: lightgrey;
+    margin: auto;
+    padding: 0;
+}
+
+.form-container {
+    width: 320px; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the form horizontally on the page */
+    padding: 10px; /* Add padding for spacing inside the container */
+    border: 2px solid #333; /* Border style (color and width) */
+    text-align: center;
+    margin-left: 500px;
+    margin-top: 100px;
+}
+
+.form-container label {
+    font-weight: bold;
+}
+

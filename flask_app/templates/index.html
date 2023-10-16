@@ -3,9 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <title>Nostalgic Toys</title>
 </head>
 <body>
-    
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <p style="color: red;">{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="form-container">
+        <h1 class="user_registration">User Registrtaion</h1><br>
+        <form id="register-form" action="/register" method="POST">
+            <label for="first_name">First Name (Min of 3 characters, letters only):</label><br>
+            <input type="text" id="first_name" name="first_name" required><br>
+            <label for="last_name">Last Name (Min of 3 characters, letters only):</label><br>
+            <input type="text" id="last_name" name="last_name" required><br>
+            <label for="email">Email (example@example.com):</label><br>
+            <input type="text" id="email" name="email" required><br>
+            <label for="password">Password (Min 8 characters):</label><br>
+            <input type="text" id="password" name="password" required><br>
+            <label for="confirm">Confirm Password:</label><br>
+            <input type="text" id="confirm" name="confirm" required><br><br>
+            <input type="submit" value="Register"><br><br>
+        </form>
+    </div>
+
+    <div class="form-container">
+        <h1 class="user_login">Login</h1>
+        <form id="login-form" action="/login" method="POST">
+            <label for="email">Email:</label><br>
+            <input type="text" id="email" name="email" required><br>
+            <label for="password">Password:</label><br>
+            <input type="text" id="password" name="password" required><br><br>
+            <input type="submit" value="Login">
+        </form>
+    </div><br><br>
 </body>
 </html>

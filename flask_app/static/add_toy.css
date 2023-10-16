@@ -1,0 +1,58 @@
+body{
+    background-color: lightgrey;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center; /* Center the text horizontally */
+    top: 50%; /* Move the element down by 50% of the container's height */
+    left: 50%; /* Move the element to the right by 50% of the container's width */
+}
+
+.form-container {
+    background-color: lightgray;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin-left: 600px;
+}
+
+.form-container label {
+    display: block;
+    font-weight: bold; /* Make the labels bold */
+}
+
+
+.nav-bar {
+    list-style: none;
+    padding: 0;
+}
+
+/* Style the list items (menu items) */
+.nav-bar li {
+    display: inline; /* Display list items horizontally */
+    margin-right: 10px; /* Add some space between items */
+}
+
+/* Position the navigation bar at the top right corner */
+.nav-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px; /* Add padding for spacing */
+    background-color: lightgray; /* Background color for the navigation bar */
+}
+
+/* Style the links (menu items) */
+.nav-bar li a {
+    text-decoration: none;
+    color: black; /* Text color for menu items */
+}
+
+/* Style the links on hover (optional) */
+.nav-bar li a:hover {
+    text-decoration: underline; /* Underline on hover */
+}

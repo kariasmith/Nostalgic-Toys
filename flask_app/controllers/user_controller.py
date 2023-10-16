@@ -1,6 +1,9 @@
 from flask import render_template, request, session, redirect, flash
 from flask_app import app
 from flask_app.models.user_model import User
+from flask_app.models.toy_model import Toy
+
+
 from flask_bcrypt import Bcrypt
 
 bcrypt=Bcrypt(app)
@@ -43,9 +46,7 @@ def login():
         return redirect('/')
     
     session["user_id"]=user.id
-    return redirect('/dashboard')    
-
-
+    return redirect('/dashboard')  
 
 @app.route('/logout')
 def logout():

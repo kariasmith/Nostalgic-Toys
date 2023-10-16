@@ -1,4 +1,5 @@
-from flask_app.controllers import users
+from flask_app.controllers import user_controller
+from flask_app.controllers import toy_controller
 from flask_app import app
 
 if __name__=="__main__":
