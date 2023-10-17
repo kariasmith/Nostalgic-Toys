@@ -72,12 +72,8 @@ def view_toy(id):
     data={
         "id": id
     }
-    # data2={
-    #     "id": session["user_id"]
-    # }
 
     toy=Toy.show_toy(data)
-    # user=User.get_by_id(data2)
     return render_template("show_toy.html", toy=toy)
 
 
@@ -92,10 +88,6 @@ def edit_toy(id):
     toy=Toy.show_toy(data)
     print(data)
     
-    # data2={
-    #     "id": session["user_id"]
-    # }
-    # user=User.get_by_id(data2)
     return render_template("edit_toy.html", toy=toy)
 
 
