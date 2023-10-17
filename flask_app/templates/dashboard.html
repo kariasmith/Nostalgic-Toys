@@ -19,22 +19,20 @@
 
     <div class="container">
         {% for toy in toys %}
-        <div class="toy-card">
-            <h2>{{ toy.toy_name }}</h2>
-            <img src="{{ url_for('static', filename='uploads/' + toy.image_path) }}" alt="Toy Image">
-            <p>{{ toy.description }}</p>
-            <p>Year: {{ toy.year }}</p>
+        <div class="toy-container">
+            <h3>{{ toy.toy_name }}</h3>
+            {% set file_name="images/"+ toy.image_path %}
+            <img src="{{url_for('static', filename=file_name)}}" alt="Toy Image" />
+        </div>
+        <div class="actions">
+            <a href="/toys/{{ toy.id }}">View</a> |
+            {% if session['user_id'] == user.id %}
+            <a href="/toys/edit/{{ toy.id }}">Edit</a> |
+            <a href="/toys/delete/{{ toy.id }}">Delete</a>
+            {% endif %}
         </div>
         {% endfor %}
-
-        <div class="actions">
-            <a href="/toys/{{ toys.id }}">View</a> |
-            {% if session['user_id'] == toys.user_id %}
-            <a href="/toys/edit/{{ toys.id }}">Edit</a> |
-            <a href="/toys/update/{{ toys.id }}">Update</a> |
-            <a href="/toys/delete/{{ toys.id }}">Delete</a>
-            {% endif %}
-    </div> 
+    </div>
 
 </body>
 </html>

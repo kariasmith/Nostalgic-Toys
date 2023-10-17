@@ -3,28 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='edit_toy.css') }}">
     <script src="script.js"></script>
     <title>Edit Toy</title>
 </head>
 <body>
-    <form id="edit-form" action="/toys/edit/<int:id>" method="POST"enctype="multipart/form-data">
-        <input type="hidden" name="user_id" value="{{session['user_id']}}">
-        
+    <h1>Edit Toy</h1>
+    <nav class="nav-bar">
+        <ul>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <form class="form-container" action="/toys/update/{{toy.id}}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{toy.id}}">
         <label for="toy_name">Toy Name:</label>
-        <input type="text" id="toy_name" name="toy_name" required>
+        <input type="text" id="toy_name" name="toy_name" value="{{toy.toy_name}}" required>
 
         <div class="container">
             <img src="default-image.jpg" alt="Your Image" class="image" id="uploadedImage">
-            <input type="file" accept="image/*" class="hidden" id="imageInput" onchange="displayImage()">
+            <label for="imageInput">Upload Image:</label>
+            <input type="file" accept="image/*" name="imageInput" id="imageInput">
         </div>
 
         <label for="description">Description:</label>
-        <input type="text" id="description" name="description" required>
+        <input type="text" id="description" name="description" value="{{toy.description}}" required>
 
         <label for="year">Year:</label>
-        <input type="text" id="year" name="year" required>
+        <input type="text" id="year" name="year" value="{{toy.year}}" required>
 
-        <button type="button" onclick="updateToy()">Update</button>
+        <input type="submit" value="Update">
     </form>
 </body>
 </html>

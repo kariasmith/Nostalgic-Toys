@@ -34,27 +34,33 @@ def new_toy():
         if not Toy.validate_toy(request.form):
             return render_template("new_toy.html")
         
-        data={
-            "toy_name": request.form["toy_name"],
-            "description": request.form["description"],
-            "year": request.form["year"],
-            "user_id": session["user_id"]
-            }
-        
-        uploaded_image = request.files.get('imageInput')
-        if uploaded_image:
+    uploaded_image = request.files.get('imageInput')
+    print(uploaded_image)
+    if 'imageInput' not in request.files:
+            flash('No file part')
+            print("Image not in request files")
+            return redirect("/dashboard")
+    else:
+        print('Image in get files')
+        file_name= uploaded_image.filename
+        print(file_name)
             # Save the uploaded image to a specific folder on your server
             # Construct the image path based on a filename (e.g., the toy's name)
             # This assumes you have a folder named 'uploads' for storing images
-            image_filename = secure_filename(uploaded_image.filename)
-            image_path = os.path.join(app.config['uploads'], image_filename)
-            uploaded_image.save(image_path)
-
-            # Store the image path in the data dictionary
-            data["image_path"] = image_filename
+        image_filename = secure_filename(uploaded_image.filename)
+        image_path = os.path.join(app.config["upload_folder"], image_filename)
+        uploaded_image.save(image_path)
+        
+    data={
+        "toy_name": request.form["toy_name"],
+        "description": request.form["description"],
+        "image_path" : file_name,
+        "year": request.form["year"],
+        "user_id": session["user_id"]
+    }
             
-        Toy.add_toy(data)
-        print(data)
+    Toy.add_toy(data)
+    print(data)
     return redirect('/dashboard')
     
     
@@ -102,11 +108,28 @@ def update_toy(id):
         if not Toy.validate_toy(request.form):
             print("validation failed")
             return redirect(f'/toys/edit/{id}')
+        
+    uploaded_image = request.files.get('imageInput')
+    print(uploaded_image)
+    if 'imageInput' not in request.files:
+            flash('No file part')
+            print("Image not in request files")
+            return redirect("/dashboard")
+    else:
+        print('Image in get files')
+        file_name= uploaded_image.filename
+        print(file_name)
+            # Save the uploaded image to a specific folder on your server
+            # Construct the image path based on a filename (e.g., the toy's name)
+            # This assumes you have a folder named 'uploads' for storing images
+        image_filename = secure_filename(uploaded_image.filename)
+        image_path = os.path.join(app.config["upload_folder"], image_filename)
+        uploaded_image.save(image_path)
 
     data={
         "id": id,
         "toy_name": request.form["toy_name"],
-        # "image": request.form["image"],------------------------------Not sure for a blob file
+        "image_path" : file_name,
         "description": request.form["description"],
         "year": request.form["year"]
     }

@@ -27,11 +27,11 @@ class Toy:
     def view_toys(cls):
         query = "SELECT * FROM toys;"
         results = connectToMySQL(cls.DB).query_db(query)
-        print("Raw data for all toys: ", results)
+        # print("Raw data for all toys: ", results)
         toys = []
         for x in results:
             toys.append(x)
-        print("The initiated toys result:", toys)
+        # print("The initiated toys result:", toys)
         return toys
     
     @classmethod
@@ -39,8 +39,8 @@ class Toy:
         if not cls.validate_toy(data):
             print("in save if not valid...")
             return False
-        print("Data passed into create add_toy METHOD: ", data)
-        query = "INSERT into toys (toy_name, description, year, image_path, created_at, updated_at, user_id) values (%(toy_name)s, %(description)s, %(year)s, %(images)s, NOW(), NOW(), %(user_id)s);"
+        # print("Data passed into create add_toy METHOD: ", data)
+        query = "INSERT into toys (toy_name, description, year, image_path, created_at, updated_at, user_id) values (%(toy_name)s, %(description)s, %(year)s, %(image_path)s, NOW(), NOW(), %(user_id)s);"
         result = connectToMySQL(cls.DB).query_db(query, data)
         return result
 

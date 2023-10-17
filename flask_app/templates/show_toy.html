@@ -8,13 +8,21 @@
     <title>Show Toy</title>
 </head>
 <body>
-    {% for toy in toy_records %}
-    <div class="toy-card">
-        <h2>{{ toy.toy_name }}</h2>
-        <img src="{{ url_for('static', filename='uploads/' + toy.image_path) }}" alt="Toy Image">
-        <p>{{ toy.description }}</p>
-        <p>Year: {{ toy.year }}</p>
+    <nav class="nav-bar">
+        <ul>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="toy-container">
+            <h3>{{ toy.toy_name }}</h3>
+            {% set file_name="images/"+ toy.image_path %}
+            <img src="{{url_for('static', filename=file_name)}}" alt="Toy Image" />
+            <p>{{ toy.description }}</p><br><br>
+            <p>Year: {{ toy.year }}</p>
+            <p>Added By: {{toy.first_name}}</p>
+        </div>
     </div>
-{% endfor %}
 </body>
 </html>
