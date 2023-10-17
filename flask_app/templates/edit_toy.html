@@ -22,7 +22,8 @@
         <input type="text" id="toy_name" name="toy_name" value="{{toy.toy_name}}" required>
 
         <div class="container">
-            <img src="default-image.jpg" alt="Your Image" class="image" id="uploadedImage">
+            {% set file_name="images/"+ toy.image_path %}
+            <img src="{{url_for('static', filename=file_name)}}" alt="Your Image" class="image" id="uploadedImage" width="50" length="50">
             <label for="imageInput">Upload Image:</label>
             <input type="file" accept="image/*" name="imageInput" id="imageInput">
         </div>
